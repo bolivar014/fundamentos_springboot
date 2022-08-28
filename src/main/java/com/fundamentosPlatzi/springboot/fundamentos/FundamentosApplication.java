@@ -1,5 +1,6 @@
 package com.fundamentosPlatzi.springboot.fundamentos;
 
+import com.fundamentosPlatzi.springboot.fundamentos.bean.MyBean;
 import com.fundamentosPlatzi.springboot.fundamentos.component.ComponentDependency;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -13,10 +14,12 @@ public class FundamentosApplication implements CommandLineRunner {
 	// Llamamos a objeto de tipo ComponentDependency a partir de la interfaz
  	*/
 	private ComponentDependency componentDependency;
+	private MyBean myBean;
 
 	// Llamamos al constructor e instanciamos la dependencia para poderla inyectar.
-	public FundamentosApplication(@Qualifier("componentTwoImplement") ComponentDependency componentDependency) {
+	public FundamentosApplication(@Qualifier("componentTwoImplement") ComponentDependency componentDependency, MyBean myBean) {
 		this.componentDependency = componentDependency;
+		this.myBean = myBean;
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(FundamentosApplication.class, args);
@@ -27,5 +30,6 @@ public class FundamentosApplication implements CommandLineRunner {
 	public void run(String... args){
 		// Llamamos a la propiedad componentDependency
 		componentDependency.saludar();
+		myBean.print();
 	}
 }
